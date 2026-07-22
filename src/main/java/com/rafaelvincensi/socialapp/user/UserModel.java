@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table (name = "users")
@@ -31,5 +32,4 @@ public class UserModel {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
-
 }
