@@ -1,4 +1,6 @@
 package com.rafaelvincensi.socialapp.music;
 
-public interface MusicRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MusicRepository extends JpaRepository<MusicModel, Long> {
 }

@@ -1,11 +1,9 @@
 package com.rafaelvincensi.socialapp.music;
 
-import com.rafaelvincensi.socialapp.user.UserModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.User;
 
 @Entity
 @Table (name = "music")
