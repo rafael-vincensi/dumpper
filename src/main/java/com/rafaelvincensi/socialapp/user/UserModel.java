@@ -1,5 +1,6 @@
 package com.rafaelvincensi.socialapp.user;
 
+import com.rafaelvincensi.socialapp.music.MusicModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,4 +33,14 @@ public class UserModel {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    private String currentSongTitle;
+    private String currentSongArtist;
+    private String currentSongUrl;
+    private boolean isListening;
+
+    @ManyToOne
+    @JoinColumn(name = "favorite_music_id")
+    private MusicModel favoriteMusic;
+
 }
