@@ -1,5 +1,8 @@
 package com.rafaelvincensi.socialapp.user;
 
+import jakarta.servlet.ServletRequest;
+import org.apache.coyote.Response;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,25 +16,48 @@ public class UserController {
     }
 
     @PostMapping
-    public UserModel criarUser(@RequestBody UserModel userModel){
-        return userService.criarUser(userModel);
+    public ResponseEntity<UserModel> criarUser(@RequestBody UserModel userModel){
+        UserModel user = userService.criarUser(userModel);
+        return ResponseEntity.ok(user);
     }
 
     @GetMapping("/{id}")
-    public UserModel listarUserPorId(@PathVariable Long id){
-        return userService.listarUserPorId(id);
+    public ResponseEntity<UserModel> listarUserPorId(@PathVariable Long id){
+        UserModel userModel = userService.listarUserPorId(id);
+        return ResponseEntity.ok(userModel);
     }
 
     @PutMapping("/{id}")
-    public UserModel atualizarUser(@PathVariable Long id, @RequestBody UserModel userModelAtualizado){
-        return userService.atualizarUser(id, userModelAtualizado);
+    public ResponseEntity<UserModel> atualizarUser(@PathVariable Long id, @RequestBody UserModel userModelAtualizado){
+        UserModel userModel = userService.atualizarUser(id, userModelAtualizado);
+        return ResponseEntity.ok(userModel);
     }
 
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id){
+    public ResponseEntity<String> deleteUser(@PathVariable Long id, ServletRequest servletRequest){
         userService.deleteUser(id);
+        return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/username/{username}")
+    public ResponseEntity<UserModel> getUserProfile(@PathVariable String username){
+        UserModel userModel = userService.getUserProfile(username);
+        if (userModel != null) {
+            return ResponseEntity.ok(userModel);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
+    @PatchMapping("/{id}/listening")
+    public ResponseEntity<UserModel> updateListeningStatus(@PathVariable Long id, @RequestParam boolean isListening, @RequestParam String currentSongTitle, @RequestParam String currentSongArtist, @RequestParam String currentSongUrl){
+        UserModel userModel = userService.updateListeningStatus(id, isListening, currentSongTitle, currentSongArtist, currentSongUrl);
+        if (userModel != null)
+        {
+            return ResponseEntity.ok(userModel);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+}
 }
