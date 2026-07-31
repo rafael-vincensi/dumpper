@@ -1,12 +1,13 @@
 package com.rafaelvincensi.socialapp.user;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
 public class UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -25,7 +26,7 @@ public class UserService {
     }
 
     public UserModel listarUserPorId(Long id){
-        Optional<UserModel> userPorId =userRepository.findById(id);
+        Optional<UserModel> userPorId = userRepository.findById(id);
         return userPorId.orElse(null);
     }
 
@@ -33,5 +34,27 @@ public class UserService {
     public void deleteUser(Long id){
         userRepository.deleteById(id);
     }
+
+    public UserModel getUserProfile(String username){
+        return userRepository.findByUsername(username);
+    }
+
+    public UserModel updateListeningStatus(Long id, boolean isListening, String currentSongTitle, String currentSongArtist, String currentSongUrl) {
+       Optional<UserModel> userModel = userRepository.findById(id);
+
+       if (userModel.isPresent()){
+        UserModel user = userModel.get();
+
+           user.setListening(isListening);
+           user.setCurrentSongTitle(currentSongTitle);
+           user.setCurrentSongArtist(currentSongArtist);
+           user.setCurrentSongUrl(currentSongUrl);
+           return userRepository.save(user);
+       }
+    return null;
+    }
+
+
+
 
 }
