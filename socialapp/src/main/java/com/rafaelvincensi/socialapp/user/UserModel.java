@@ -43,4 +43,9 @@ public class UserModel {
     @JoinColumn(name = "favorite_music_id")
     private MusicModel favoriteMusic;
 
+    private Integer followers;
+    private Integer following;
+
+
+
 }
