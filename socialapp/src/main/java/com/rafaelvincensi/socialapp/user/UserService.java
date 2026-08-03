@@ -45,7 +45,7 @@ public class UserService {
        if (userModel.isPresent()){
         UserModel user = userModel.get();
 
-           user.setListening(isListening);
+           user.setIsListening(isListening);
            user.setCurrentSongTitle(currentSongTitle);
            user.setCurrentSongArtist(currentSongArtist);
            user.setCurrentSongUrl(currentSongUrl);
