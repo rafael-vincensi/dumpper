@@ -37,7 +37,7 @@ public class UserModel {
     private String currentSongTitle;
     private String currentSongArtist;
     private String currentSongUrl;
-    private boolean isListening;
+    private Boolean isListening;
 
     @ManyToOne
     @JoinColumn(name = "favorite_music_id")
