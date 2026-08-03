@@ -1,12 +1,12 @@
 package com.rafaelvincensi.socialapp.user;
 
 import jakarta.servlet.ServletRequest;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("users")
+@CrossOrigin(origins = "*")
+@RequestMapping("/users")
 public class UserController {
 
     private UserService userService;
