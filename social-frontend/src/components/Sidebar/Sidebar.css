@@ -1,0 +1,75 @@
+.sidebar {
+  width: 300px;
+  height: 100vh;
+  background-color: #F5F3EE;
+  color: #0511F2;
+  font-weight: 500;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  margin: auto;
+}
+
+.sidebar-logo {
+  font-size: 20px;
+}
+
+.menu-sidebar {
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  
+}
+
+.menu-sidebar a {
+  color: #0511F2;
+  text-decoration: underline;
+}
+
+.profile-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.music-profile {
+  padding: 10px;
+  width: 100%;
+  margin-top: 180px;
+  background-color: #F0EEE9;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.profile-user {
+  font-weight: normal;
+  height: 60px;
+  width: 240px;
+  background-color: #F0EEE9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  border-radius: 4px;
+}
+
+.user-avatar {
+  width: 28px;
+  height: 28px;
+  margin-left: 10px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.name-user {
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.change-profile {
+  margin-right: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}

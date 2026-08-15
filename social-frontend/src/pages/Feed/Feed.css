@@ -1,0 +1,187 @@
+.app-layout {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #F5F3EE;
+}
+
+.feed-content {
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 40px 60px;
+  background-color: #F5F3EE;
+}
+
+.feed-container {
+  max-width: 800px;
+}
+
+.friends-box {
+  display: flex;
+  margin-left: 850px;
+  margin-top: 40px;
+  position: fixed;
+  top: 40px;
+  flex-direction: column;
+  width: 270px;
+  height: 600px;
+  background-color: #F0EEE9;
+  padding: 20px; 
+  gap: 18px;
+  border-radius: 5px;
+}
+
+.friend-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.friends-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 22px;     
+}
+
+.friend-img {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 14px;
+  margin-left: 8px;
+  flex-shrink: 0; 
+}
+
+.friend-username{
+    font-size: 16px;
+    text-decoration: underline;
+}
+
+.friendlist-music {
+    font-size: 12px;
+    color: #0D15A6;
+}
+
+.friend-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    top: 20px;
+    gap: 7px;
+    margin-left: 835px;
+}
+
+.post-avatar-wrapper {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+  flex-shrink: 0; 
+  overflow: hidden; 
+  border-radius: 50%;
+}
+
+.follow-profile {
+    margin-left: 20px;
+    color: #0D15A6;
+    text-decoration: underline;
+}
+
+.options-post {
+  margin-left: auto;
+  color: #0511F2;
+  font-size: 24px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.post-profile{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.post-avatar-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.feed-post-card {
+  margin-left: 150px;
+  margin-bottom: 24px;
+  width: 400px;  
+  background-color: #F5F3EE;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.post-content{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.post-content .post-author{
+    color: #0D15A6;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.post-profile .post-author {
+    text-decoration: underline;
+    margin-top: 4px;
+}
+
+.post-media {
+  margin-top: 14px;
+  width: 400px;
+  height: 400px; 
+  overflow: hidden;
+  background-color: #F5F3EE;
+  flex-shrink: 0;
+}
+
+.post-media img {
+  width: 100%;
+  height: 100%;          /* Mudei de auto para 100% para preencher o quadrado */
+  object-fit: cover;    /* Corta o excesso proporcionalmente para caber perfeitamente */
+  object-position: center; /* Mantém o foco no meio da foto (ótimo para rostos) */
+  display: block;
+}
+
+.post-footer {
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  height: auto;
+}
+
+.post-time{
+  margin-right: -10px;
+  font-size: 14px;
+  color: #797ED9;
+}
+
+.like-post {
+  display: flex;
+  object-fit: contain;
+}
+
+.like-container {
+  margin-left:-18px ;
+  display: flex;
+  align-items: center; 
+  gap: 3px;
+}

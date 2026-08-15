@@ -1,0 +1,184 @@
+.app-layout {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.profile-content {
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  margin-left: 120px;
+  margin-top: 10px;
+  padding: 40px 60px;
+  background-color: #F5F3EE;
+}
+
+.profile-container {
+  max-width: 800px;
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.avatar-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-avatar {
+  width: 160px;
+  height: 160px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.current-song-text {
+  font-size: 13px;
+  color: #0D15A6;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-info h1 {
+  font-size: 26px;
+  font-weight: 500;
+  color: #0511F2;
+  text-decoration: underline;
+}
+
+.username {
+  color: #797ED9;
+  font-size: 14px;
+  margin-top: 2px;
+  text-decoration: underline;
+}
+
+.user-bio {
+  margin-top: 16px;
+  text-decoration: none;
+  color: #0511F2;
+  font-size: 15px;
+}
+
+.follows-info {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin-left: 20px;
+}
+
+.follow-user {
+  color: #0D15A6;
+  font-size: 22px;
+  margin-left: -20px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.followers {
+  color: #797ED9;
+  margin-top: 40px;
+  margin-left: -60px;
+  font-size: 14px;
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
+.following {
+  color: #797ED9;
+  margin-top: 40px;
+  margin-left: 10px;
+  font-size: 14px;
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
+.music-section {
+  margin-top: -30px;
+  margin-left: 390px;
+}
+
+.favorite-music {
+  font-size: 16px;
+  text-decoration: underline;
+  color: #0511F2;
+  font-weight: 500;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.add-post-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #0511F2;
+  cursor: pointer;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background-color: #E1E1E1;
+  border-radius: 4px;
+  padding: 8px 12px;
+  width: 260px;
+}
+
+.search-symbol {
+  color: #797ED9;
+  margin-right: 5px;
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  color: #0511F2;
+  font-size: 14px;
+  width: 100%;
+}
+
+.posts-grid-section {
+  margin-top: 115px;
+  margin-left: -55px; 
+
+  max-width: 850px; 
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.post-card {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #EAE6DF;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.post-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
