@@ -34,13 +34,15 @@ public class PostService {
         postRepository.deleteById(id);
     }
 
-    public PostModel curtirPost(Long id){
+    public PostModel atualizarPost(Long id, PostModel postAtualizado){
         PostModel post = buscarPostId(id);
-        if (post != null){
-            post.setLikesCount(post.getLikesCount() + 1);
-            return postRepository.save(post);
+
+        if(post != null){
+            postAtualizado.setId(id);
+            postRepository.save(postAtualizado);
         }
         return null;
     }
+
 
 }

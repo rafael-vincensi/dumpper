@@ -36,7 +36,7 @@ public class UserModel {
 
     private String currentSongTitle;
     private String currentSongArtist;
-        private String currentSongUrl;
+    private String currentSongUrl;
     private Boolean isListening;
 
     @ManyToOne

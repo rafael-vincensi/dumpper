@@ -1,5 +1,6 @@
 package com.rafaelvincensi.socialapp.post;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,9 +36,11 @@ public class PostController {
         postService.deletePost(id);
    }
 
-   @PostMapping("/{id}/like")
-    public PostModel curtirPost(@PathVariable Long id){
-        return postService.curtirPost(id);
-   }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<PostModel> atualizarPost(@PathVariable Long id,@RequestBody PostModel postModel){
+        PostModel postAtualizado = postService.atualizarPost(id, postModel);
+        return ResponseEntity.ok().build();
+    }
+
 
 }
