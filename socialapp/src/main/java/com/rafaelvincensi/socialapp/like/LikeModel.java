@@ -20,7 +20,7 @@ public class LikeModel {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserModel users;
+    private UserModel user;
 
     @ManyToOne
     @JoinColumn(name = "post_id")
