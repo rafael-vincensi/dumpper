@@ -1,6 +1,5 @@
 package com.rafaelvincensi.socialapp.user;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
@@ -53,4 +52,27 @@ public class UserService {
        }
     return null;
     }
+
+    public UserModel registerUser(RegisterDTO dto){
+        UserModel user = new UserModel();
+
+        user.setName(dto.name());
+        user.setUsername(dto.username());
+        user.setEmail(dto.email());
+        user.setPassword(dto.password());
+
+        return userRepository.save(user);
+    }
+
+    public UserModel loginUser(String email, String password) {
+        UserModel user = userRepository.findByEmail(email);
+
+        if (user != null) {
+            if (password.equals(user.getPassword())) {
+                return user;
+            }
+        }
+        return null;
+    }
+
 }
