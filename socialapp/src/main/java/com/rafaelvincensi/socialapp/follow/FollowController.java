@@ -1,14 +1,13 @@
 package com.rafaelvincensi.socialapp.follow;
 
 import com.rafaelvincensi.socialapp.user.UserModel;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/follow")
 @CrossOrigin(origins = "*")
 public class FollowController {
@@ -20,7 +19,8 @@ public class FollowController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> followUser(@RequestParam Long followeId,@RequestParam Long followingId){
+    public ResponseEntity<Void> followUser(@RequestParam Long followerId, @RequestParam Long followingId){
+        followService.follow(followerId, followingId);
         return ResponseEntity.ok().build();
     }
 
