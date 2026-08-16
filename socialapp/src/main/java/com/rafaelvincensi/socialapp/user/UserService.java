@@ -64,6 +64,15 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    
+    public UserModel loginUser(String email, String password) {
+        UserModel user = userRepository.findByEmail(email);
+
+        if (user != null) {
+            if (password.equals(user.getPassword())) {
+                return user;
+            }
+        }
+        return null;
+    }
 
 }
