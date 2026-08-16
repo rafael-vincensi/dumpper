@@ -7,7 +7,6 @@ import com.rafaelvincensi.socialapp.user.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import javax.crypto.spec.PSource;
 import java.util.List;
 
 @Service
@@ -24,37 +23,27 @@ public class LikeService {
     }
 
     @Transactional
-    public LikeModel curtirPost(Long userId, Long postId){
+    public PostModel curtirPost(Long userId, Long postId){
+        PostModel post = postRepository.findById(postId).orElseThrow();
+
         if (likeRepository.existsByUserIdAndPostId(userId, postId)) {
-            return null;
+            likeRepository.deleteByUserIdAndPostId(userId, postId);
+
+            int novoTotal = Math.max(0, post.getLikesCount() - 1);
+            post.setLikesCount(novoTotal);
+            return postRepository.save(post);
         }
-        UserModel user = userRepository.findById(userId)
-                .orElseThrow();
-        PostModel post = postRepository.findById(postId)
-                .orElseThrow();
+
+        UserModel user = userRepository.findById(userId).orElseThrow();
 
         LikeModel like = new LikeModel();
-        like.setUsers(user);
+        like.setUser(user);
         like.setPost(post);
+        likeRepository.save(like);
 
-        LikeModel likeSalvo = likeRepository.save(like);
         post.setLikesCount(post.getLikesCount() + 1);
-        postRepository.save(post);
-
-        return likeSalvo;
+        return postRepository.save(post);
     }
-
-        @Transactional
-        public void descurtirPost(Long userId, Long postId) {
-            if (!likeRepository.existsByUserIdAndPostId(userId, postId)) {
-                return;
-            }
-            likeRepository.deleteByUserIdAndPostId(userId, postId);
-            PostModel post = postRepository.findById(postId)
-                    .orElseThrow();
-            post.setLikesCount(post.getLikesCount() - 1);
-            postRepository.save(post);
-        }
 
         public boolean usuarioCurtiuPost(Long userId, Long postId){
             return likeRepository.existsByUserIdAndPostId(userId, postId);
@@ -63,7 +52,7 @@ public class LikeService {
         public List<UserModel> listarUserQueCurtiu(Long postId){
         List<LikeModel> like = likeRepository.findByPostId(postId);
         return like.stream()
-                .map(LikeModel::getUsers)
+                .map(LikeModel::getUser)
                 .toList();
     }
 
