@@ -22,9 +22,15 @@ public class PostController {
     }
 
     @PostMapping
-    public PostModel criarPost(@RequestBody PostModel postModel){
-        return postService.criarPost(postModel);
-    }
+    public ResponseEntity<Object> criarPost(@RequestBody PostModel postModel){
+        try {
+            PostModel post = postService.criarPost(postModel);
+            return ResponseEntity.ok(post);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().body("asd" + e.getMessage());
+        }
+        }
 
     @GetMapping
     public List<PostModel> listarPost(){
