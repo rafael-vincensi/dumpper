@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import CreatePost from '../CreatePost/CreatePost';
-import { getPosts, likePost } from '../../services/api';
+import { getPosts, likePost, createPost } from '../../services/api'; // <-- 1. Importe o createPost aqui
 import './Feed.css';
 
 export default function Feed({ onNavigateToProfile }) {
@@ -32,13 +32,22 @@ export default function Feed({ onNavigateToProfile }) {
     }
   }
 
-  const handleSaveNewPost = (newPost) => {
-    setPostsList([newPost, ...postsList]);
-    setIsCreatingPost(false);
+  const handleSaveNewPost = async (newPostData) => {
+    try {
+      const postSalvoNoBanco = await createPost(
+        newPostData.content, 
+        newPostData.imageUrl, 
+        usuarioLogadoId
+      );
+
+      setPostsList([postSalvoNoBanco, ...postsList]);
+      setIsCreatingPost(false);
+    } catch (error) {
+      console.error("Erro ao criar post no back-end:", error);
+    }
   };
   
   const friendList = [
-    // ... seus amigos continuam aqui igualzinho ...
   ];
 
   return (
