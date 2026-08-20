@@ -1,0 +1,1 @@
+ALTER TABLE tb_post ALTER COLUMN image_url TYPE TEXT;
