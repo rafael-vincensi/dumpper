@@ -28,11 +28,10 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserModel> atualizarUser(@PathVariable Long id, @RequestBody UserModel userModelAtualizado){
-        UserModel userModel = userService.atualizarUser(id, userModelAtualizado);
-        return ResponseEntity.ok(userModel);
+    public ResponseEntity<UserModel> updateUser(@PathVariable Long id, @RequestBody UserModel userModel){
+        UserModel user = userService.updateUser(id, userModel);
+        return ResponseEntity.ok(user);
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id, ServletRequest servletRequest){
@@ -60,4 +59,19 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
 }
+
+    //n ta chegado no front
+
+    @PostMapping("/register")
+    public UserModel registerUser(RegisterDTO UserDTO) {
+        return userService.registerUser(UserDTO);
+    }
+
+    //n ta chegado no front
+    @PostMapping("/login")
+    public UserModel loginUser(String email, String password) {
+        return userService.loginUser(email, password);
+    }
+
+
 }
