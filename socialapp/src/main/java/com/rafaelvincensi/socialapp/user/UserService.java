@@ -73,11 +73,11 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public UserModel loginUser(String email, String password) {
-        UserModel user = userRepository.findByEmail(email);
+    public UserModel loginUser(LoginDTO dto) {
+        UserModel user = userRepository.findByEmail(dto.email());
 
         if (user != null) {
-            if (password.equals(user.getPassword())) {
+            if (dto.password().equals(user.getPassword())) {
                 return user;
             }
         }
