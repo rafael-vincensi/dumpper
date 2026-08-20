@@ -3,7 +3,7 @@ import './CreatePost.css';
 
 export default function CreatePost({ onCancel, onSave }) {
   const [description, setDescription] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState(""); // <-- Corrigido o nome da função
   const [imagePosition, setImagePosition] = useState("center"); 
   
   const currentUser = {
@@ -11,20 +11,25 @@ export default function CreatePost({ onCancel, onSave }) {
     avatar: "https://loyolaphoenix.com/wp-content/uploads/2025/03/Courtesy-of-YZY.jpeg"
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageUrl(reader.result); // <-- Usando a função correta
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handlePublish = (e) => {
     e.preventDefault();
-    if (!description && !imgUrl) return;
+    if (!description && !imageUrl) return;
 
+    // Enviando apenas o que o Back-end (PostModel) espera receber
     const newPost = {
-      id: Date.now(),
-      avatar: currentUser.avatar,
-      author: currentUser.username,
-      description: description,
-      tag: null,
-      imgUrl: imgUrl || "https://i.pinimg.com/originals/05/b4/fb/05b4fbc3f169175e6deb97b3977175b6.jpg",
-      imagePosition: imagePosition,
-      likes: 0,
-      time: "agora",
+      content: description,
+      imageUrl: imageUrl
     };
 
     onSave(newPost);
@@ -32,17 +37,16 @@ export default function CreatePost({ onCancel, onSave }) {
 
   return (
     <div className="create-post-layout">
-      {/* Coluna Esquerda: Formulário */}
+      
       <div className="create-form-section">
         <h2>new post</h2>
 
         <div className="create-form-group">
-          <label>choose image (URL)</label>
+          <label>choose image</label>
           <input 
-            type="text" 
-            placeholder="Cole o link da imagem aqui..." 
-            value={imgUrl}
-            onChange={(e) => setImgUrl(e.target.value)}
+            type="file" 
+            accept="image/*"
+            onChange={handleFileChange}
           />
           <div className="create-position-selector">
             <span>enquadramento:</span>
@@ -68,7 +72,6 @@ export default function CreatePost({ onCancel, onSave }) {
         </div>
       </div>
 
-      {/* Coluna Direita: Preview em Tempo Real */}
       <div className="create-preview-section">
         <h3>preview</h3>
         <div className="create-post-card">
@@ -89,7 +92,7 @@ export default function CreatePost({ onCancel, onSave }) {
 
           <div className='create-post-img'>
             <img 
-              src={imgUrl || "https://i.pinimg.com/originals/05/b4/fb/05b4fbc3f169175e6deb97b3977175b6.jpg"} 
+              src={imageUrl || "https://i.pinimg.com/originals/05/b4/fb/05b4fbc3f169175e6deb97b3977175b6.jpg"} 
               alt="Preview" 
               style={{ objectPosition: imagePosition }}
             />
