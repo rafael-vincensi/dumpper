@@ -45,7 +45,4 @@ public class UserModel {
 
     private Integer followers;
     private Integer following;
-
-
-
 }

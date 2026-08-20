@@ -16,13 +16,22 @@ public class UserService {
         return userRepository.save(userModel);
     }
 
-    public UserModel atualizarUser(Long id, UserModel userModelAtualizado){
-            if(userRepository.existsById(id)){
-                userModelAtualizado.setId(id);
-                return userRepository.save(userModelAtualizado);
-            }
-            return null; // null por enquanto
+
+    public UserModel updateUser(Long id, UserModel userModelUpdate){
+        Optional<UserModel> userOpt = userRepository.findById(id);
+
+        if (userOpt.isPresent()){
+            UserModel user = userOpt.get();
+
+            if (userModelUpdate.getName() != null) user.setName(userModelUpdate.getName());
+            if (userModelUpdate.getBio() != null) user.setBio(userModelUpdate.getBio());
+            if (userModelUpdate.getProfilePicture() != null) user.setProfilePicture(userModelUpdate.getProfilePicture());
+
+            return userRepository.save(user);
+        }
+        return null;
     }
+
 
     public UserModel listarUserPorId(Long id){
         Optional<UserModel> userPorId = userRepository.findById(id);
@@ -74,5 +83,7 @@ public class UserService {
         }
         return null;
     }
+
+
 
 }
