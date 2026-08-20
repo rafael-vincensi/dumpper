@@ -19,7 +19,7 @@ public class PostModel {
     private Long id;
     private String content;
 
-    @Column(name = "image_url")
+    @Column(name = "image_url", columnDefinition = "TEXT")
     private String imageUrl;
     private LocalDateTime createdAt;
     private Integer likesCount;
