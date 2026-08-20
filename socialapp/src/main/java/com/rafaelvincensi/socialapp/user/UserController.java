@@ -59,18 +59,14 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
 }
-
-    //n ta chegado no front
-
     @PostMapping("/register")
-    public UserModel registerUser(RegisterDTO UserDTO) {
+    public UserModel registerUser(@RequestBody RegisterDTO UserDTO) {
         return userService.registerUser(UserDTO);
     }
 
-    //n ta chegado no front
     @PostMapping("/login")
-    public UserModel loginUser(String email, String password) {
-        return userService.loginUser(email, password);
+    public UserModel loginUser(@RequestBody LoginDTO dto) {
+        return userService.loginUser(dto);
     }
 
 
