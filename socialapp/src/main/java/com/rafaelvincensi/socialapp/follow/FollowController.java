@@ -25,7 +25,9 @@ public class FollowController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> unfollow(@RequestParam Long followerId,@RequestParam Long followingId){
+    public ResponseEntity<Void> unfollow(
+            @RequestParam Long followerId,
+            @RequestParam Long followingId){
         followService.unfollow(followerId, followingId);
         return ResponseEntity.noContent().build();
     }
@@ -43,7 +45,8 @@ public class FollowController {
     }
 
     @GetMapping("/check")
-    public ResponseEntity<Boolean> isFollowing(@RequestParam Long followerId, @RequestParam Long followingId){
+    public ResponseEntity<Boolean> isFollowing(
+            @RequestParam Long followerId, @RequestParam Long followingId){
         Boolean status = followService.isFollowing(followerId, followingId);
         return ResponseEntity.ok(status);
     }

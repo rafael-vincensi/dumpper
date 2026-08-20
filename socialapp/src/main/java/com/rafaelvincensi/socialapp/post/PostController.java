@@ -28,7 +28,7 @@ public class PostController {
             return ResponseEntity.ok(post);
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.internalServerError().body("asd" + e.getMessage());
+            return ResponseEntity.internalServerError().body("Erro: " + e.getMessage());
         }
         }
 
