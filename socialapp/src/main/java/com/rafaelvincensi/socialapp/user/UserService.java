@@ -1,6 +1,9 @@
 package com.rafaelvincensi.socialapp.user;
 
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,6 +26,15 @@ public class UserService {
         if (userOpt.isPresent()){
             UserModel user = userOpt.get();
 
+            if (userModelUpdate.getUsername() != null && !userModelUpdate.getUsername().isEmpty()) {
+                if (!userModelUpdate.getUsername().equals(user.getUsername())) {
+                    UserModel existingUser = userRepository.findByUsername(userModelUpdate.getUsername());
+                    if (existingUser != null){
+                        throw new RuntimeException("Username ja existe!");
+                    }
+                    user.setUsername(userModelUpdate.getUsername());
+                }
+            }
             if (userModelUpdate.getName() != null) user.setName(userModelUpdate.getName());
             if (userModelUpdate.getBio() != null) user.setBio(userModelUpdate.getBio());
             if (userModelUpdate.getProfilePicture() != null) user.setProfilePicture(userModelUpdate.getProfilePicture());
@@ -84,6 +96,9 @@ public class UserService {
         return null;
     }
 
-
+    public List<UserModel> searchBar(String query){
+        List<UserModel> userList = userRepository.findByUsernameContainingIgnoreCaseOrNameContainingIgnoreCase(query, query);
+        return userList;
+    }
 
 }
