@@ -29,8 +29,8 @@ public class FollowService {
 
     @Transactional
     public void unfollow(Long followerId, Long followingId){
-        UserModel follower = userRepository.findById(followingId).orElseThrow(() -> new RuntimeException("Seguidor não encontrado"));
-        UserModel following = userRepository.findById(followerId).orElseThrow(() -> new RuntimeException("Usuario seguido nao encontrado!"));
+        UserModel follower = userRepository.findById(followerId ).orElseThrow(() -> new RuntimeException("Seguidor não encontrado"));
+        UserModel following = userRepository.findById(followingId).orElseThrow(() -> new RuntimeException("Usuario seguido nao encontrado!"));
 
         followRepository.deleteByFollowerAndFollowing(follower, following);
     }
