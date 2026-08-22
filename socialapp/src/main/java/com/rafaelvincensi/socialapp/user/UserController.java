@@ -4,6 +4,8 @@ import jakarta.servlet.ServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/users")
@@ -16,7 +18,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserModel> User(@RequestBody UserModel userModel){
+    public ResponseEntity<UserModel> criarUser(@RequestBody UserModel userModel){
         UserModel user = userService.criarUser(userModel);
         return ResponseEntity.ok(user);
     }
@@ -34,9 +36,9 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable Long id, ServletRequest servletRequest){
+    public ResponseEntity<String> deleteUser(@PathVariable Long id){
         userService.deleteUser(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/username/{username}")
@@ -69,5 +71,9 @@ public class UserController {
         return userService.loginUser(dto);
     }
 
+    @GetMapping("/search")
+    public List<UserModel> searchBar(@RequestParam("query") String query){
+        return userService.searchBar(query);
+    }
 
 }
