@@ -16,17 +16,17 @@ public class MusicController {
     }
 
     @PostMapping
-    public MusicModel criarMusica(@RequestBody MusicModel musicModel){
+    public MusicModel createMusic(@RequestBody MusicModel musicModel){
         return musicService.cadastrarMusica(musicModel);
     }
 
     @GetMapping("/{id}")
-    public MusicModel listarMusicaPorId(@PathVariable Long id){
+    public MusicModel getMusicById(@PathVariable Long id){
         return musicService.listarMusicaPorId(id);
     }
 
     @GetMapping
-    public List<MusicModel> listarMusicas(){
+    public List<MusicModel> getAllMusic(){
         return musicService.listarMusicas();
     }
 

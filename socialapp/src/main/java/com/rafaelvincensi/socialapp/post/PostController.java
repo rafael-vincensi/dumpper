@@ -17,12 +17,12 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public PostModel buscarPostId(@PathVariable Long id){
+    public PostModel getPostById(@PathVariable Long id){
         return postService.buscarPostId(id);
     }
 
     @PostMapping
-    public ResponseEntity<Object> criarPost(@RequestBody PostModel postModel){
+    public ResponseEntity<Object> createPost(@RequestBody PostModel postModel){
         try {
             PostModel post = postService.criarPost(postModel);
             return ResponseEntity.ok(post);
@@ -33,7 +33,7 @@ public class PostController {
         }
 
     @GetMapping
-    public List<PostModel> listarPost(){
+    public List<PostModel> getAllPosts(){
         return postService.listarPosts();
     }
 
@@ -43,10 +43,8 @@ public class PostController {
    }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<PostModel> atualizarPost(@PathVariable Long id,@RequestBody PostModel postModel){
+    public ResponseEntity<PostModel> updatePost(@PathVariable Long id,@RequestBody PostModel postModel){
         PostModel postAtualizado = postService.atualizarPost(id, postModel);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(postAtualizado);
     }
-
-
 }
