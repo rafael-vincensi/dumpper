@@ -28,7 +28,7 @@ public class UserModel {
     private String password;
     private String bio;
 
-    @Column(name = "profile_picture")
+    @Column(name = "profile_picture", columnDefinition = "TEXT")
     private String profilePicture;
 
     @Column(name = "created_at")

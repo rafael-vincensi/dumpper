@@ -11,20 +11,22 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
+    private final UserRepository userRepository;
     private UserService userService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @PostMapping
-    public ResponseEntity<UserModel> criarUser(@RequestBody UserModel userModel){
+    public ResponseEntity<UserModel> createUser(@RequestBody UserModel userModel){
         UserModel user = userService.criarUser(userModel);
         return ResponseEntity.ok(user);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserModel> listarUserPorId(@PathVariable Long id){
+    public ResponseEntity<UserModel> getUserById(@PathVariable Long id){
         UserModel userModel = userService.listarUserPorId(id);
         return ResponseEntity.ok(userModel);
     }
