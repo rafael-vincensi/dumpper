@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class FollowService {
 
     private final UserRepository userRepository;
-    private FollowRepository followRepository;
+    private final FollowRepository followRepository;
 
     public FollowService(FollowRepository followRepository, UserRepository userRepository) {
         this.followRepository = followRepository;
@@ -29,10 +29,21 @@ public class FollowService {
 
     @Transactional
     public void unfollow(Long followerId, Long followingId){
-        UserModel follower = userRepository.findById(followerId ).orElseThrow(() -> new RuntimeException("Seguidor não encontrado"));
+        UserModel follower = userRepository.findById(followerId).orElseThrow(() -> new RuntimeException("Seguidor não encontrado"));
         UserModel following = userRepository.findById(followingId).orElseThrow(() -> new RuntimeException("Usuario seguido nao encontrado!"));
 
-        followRepository.deleteByFollowerAndFollowing(follower, following);
+        if (followRepository.existsByFollowerAndFollowing(follower, following)){
+            followRepository.deleteByFollowerAndFollowing(follower, following);
+
+            int currentFollowing = follower.getFollowing() != null ? follower.getFollowing() : 0;
+            int currentFollowers = following.getFollowers() != null ? following.getFollowers() : 0;
+
+            follower.setFollowing(Math.max(0, currentFollowing - 1));
+            following.setFollowers(Math.max(0, currentFollowers - 1));
+
+            userRepository.save(follower);
+            userRepository.save(following);
+        }
     }
 
     @Transactional
@@ -43,6 +54,15 @@ public class FollowService {
         if (!followRepository.existsByFollowerAndFollowing(follower, following)){
             FollowModel follow = new FollowModel(follower, following);
             followRepository.save(follow);
+
+            int currentFollowing = follower.getFollowing() != null ? follower.getFollowing() : 0;
+            int currentFollowers = following.getFollowers() != null ? following.getFollowers() : 0;
+
+            follower.setFollowing(currentFollowing + 1);
+            following.setFollowers(currentFollowers + 1);
+
+            userRepository.save(follower);
+            userRepository.save(following);
         }
     }
 
@@ -72,6 +92,5 @@ public class FollowService {
                 .filter(follower::contains)
                 .collect(Collectors.toList());
     }
-
 
 }

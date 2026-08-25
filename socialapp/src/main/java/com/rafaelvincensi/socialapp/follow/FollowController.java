@@ -32,13 +32,13 @@ public class FollowController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/following/{id}")
+    @GetMapping("/following/{userId}")
     public ResponseEntity<List<UserModel>> getFollowing(@PathVariable Long userId){
         List<UserModel> following = followService.getFollowing(userId);
         return ResponseEntity.ok(following);
     }
 
-    @GetMapping("/followers/{id}")
+    @GetMapping("/followers/{userId}")
     public ResponseEntity<List<UserModel>> getFollowers(@PathVariable Long userId){
         List<UserModel> followers = followService.getFollower(userId);
         return ResponseEntity.ok(followers);
