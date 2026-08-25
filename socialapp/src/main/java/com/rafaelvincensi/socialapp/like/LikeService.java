@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LikeService {
@@ -23,11 +24,12 @@ public class LikeService {
     }
 
     @Transactional
-    public PostModel curtirPost(Long userId, Long postId){
+    public PostModel curtirPost(Long userId, Long postId) {
         PostModel post = postRepository.findById(postId).orElseThrow();
+        Optional <LikeModel> likeExistente = likeRepository.findByUserIdAndPostId(userId, postId);
 
-        if (likeRepository.existsByUserIdAndPostId(userId, postId)) {
-            likeRepository.deleteByUserIdAndPostId(userId, postId);
+        if (likeExistente.isPresent()) {
+            likeRepository.delete(likeExistente.get());
 
             int novoTotal = Math.max(0, post.getLikesCount() - 1);
             post.setLikesCount(novoTotal);
@@ -45,15 +47,14 @@ public class LikeService {
         return postRepository.save(post);
     }
 
-        public boolean usuarioCurtiuPost(Long userId, Long postId){
-            return likeRepository.existsByUserIdAndPostId(userId, postId);
-        }
-
-        public List<UserModel> listarUserQueCurtiu(Long postId){
+    public List<UserModel> listarUserQueCurtiu(Long postId) {
         List<LikeModel> like = likeRepository.findByPostId(postId);
         return like.stream()
                 .map(LikeModel::getUser)
                 .toList();
     }
 
+    public boolean userLike(Long userId, Long postId) {
+        return likeRepository.existsByUserIdAndPostId(userId, postId);
+    }
 }
