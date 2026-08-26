@@ -3,10 +3,16 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Profile from './pages/Profile/Profile';
 import Home from './pages/Feed/Feed';
+import EditProfile from './pages/EditProfile/EditProfile';
 
-function App() {
-  const [currentScreen, setCurrentScreen] = useState('feed');
+export default function App() {
+  const [currentScreen, setCurrentScreen] = useState(() => {
+    const usuarioSalvo = localStorage.getItem("usuarioLogado");
+    return usuarioSalvo ? 'feed' : 'login';
+  });
+
   const [selectedUserId, setSelectedUserId] = useState(null);
+
   const handleNavigateToProfile = (userId) => {
     setSelectedUserId(userId);
     setCurrentScreen('profile');
@@ -17,7 +23,7 @@ function App() {
       {currentScreen === 'login' && (
         <Login 
           onNavigateToRegister={() => setCurrentScreen('register')} 
-          onLoginSuccess={() => setCurrentScreen('profile')} 
+          onLoginSuccess={() => setCurrentScreen('feed')} 
         />
       )}
 
@@ -28,14 +34,27 @@ function App() {
       )}
 
       {currentScreen === 'profile' && (
-        <Profile userId={selectedUserId} />
+        <Profile 
+          userId={selectedUserId} 
+          onNavigateToProfile={handleNavigateToProfile} 
+          onNavigateBack={() => setCurrentScreen('feed')}
+          onNavigateToEdit={() => setCurrentScreen('editProfile')} 
+        />
       )}
 
       {currentScreen === 'feed' && (
-        <Home onNavigateToProfile={handleNavigateToProfile} />
+        <Home 
+          onNavigateToProfile={handleNavigateToProfile} 
+          onNavigateToEdit={() => setCurrentScreen('editProfile')} 
+        />
+      )}
+
+      {currentScreen === 'editProfile' && (
+        <EditProfile 
+          onNavigateBack={() => setCurrentScreen('feed')} 
+          onNavigateToProfile={handleNavigateToProfile}
+        />
       )}
     </div>
   );
 }
-
-export default App;
