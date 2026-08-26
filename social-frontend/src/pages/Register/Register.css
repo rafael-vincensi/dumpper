@@ -39,7 +39,6 @@
   color: #A3A3A3;
 }
 
-/* Estilo para o aviso de "@ Available" */
 .availability-text {
   font-size: 12px;
   color: #797ED9;
@@ -47,7 +46,7 @@
 }
 
 .availability-text span {
-  color: #0511F2; /* Destaque para o status (sim/não) */
+  color: #0511F2; 
   font-weight: 500;
 }
 
