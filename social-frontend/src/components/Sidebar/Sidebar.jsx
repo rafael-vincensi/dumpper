@@ -1,8 +1,26 @@
-export default function Sidebar({ user }) {
+import React, { useState } from 'react';
+import './Sidebar.css';
+import defaultImage from '../../assets/default-image.jpg';
+import logo from '../../assets/logo.png'
+
+
+export default function Sidebar({ user, onNavigateToEdit, onNavigateToProfile }) {
+  const [showMenu, setShowMenu] = useState(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem("usuarioLogado");
+    window.location.reload();
+  };
+
   return (
     <aside className="sidebar">
-      <h3 className="sidebar-logo">(logo)</h3>
       
+      <div className='sidebar-logo'>
+        <a href="/">
+        <img src={logo} height={50} />
+        </a>
+      </div>
+
       <nav className="menu-sidebar">
         <a href="/">home</a>
         <a href="/messages">messages</a>
@@ -12,24 +30,45 @@ export default function Sidebar({ user }) {
 
       <div className="profile-sidebar">
         
-        {/* Card de música dinâmico */}
         <div className="music-profile">
           {user?.isListening ? (
-            <p>🎵 {user.currentSongTitle}</p>
+            <p>{user.currentSongTitle}</p>
           ) : (
-            <p>sem musica no momento</p>
+            <p>nothing here</p>
           )}
         </div>
 
-        {/* Card do usuário dinâmico */}
-        <div className="profile-user">
-          <img 
-            src={user?.profilePicture || "https://loyolaphoenix.com/wp-content/uploads/2025/03/Courtesy-of-YZY.jpeg"} 
-            alt="Avatar" 
-            className="user-avatar"
-          />
-          <span className="name-user">@{user?.username || "juniormelansia"}</span>
-          <span className="change-profile">...</span>
+        <div className="profile-user" style={{ position: 'relative' }}>
+          <div 
+            onClick={onNavigateToProfile} 
+            style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '8px', flex: 1 }}
+          >
+            <img 
+              src={user?.profilePicture || defaultImage} 
+              alt="Avatar" 
+              className="user-avatar"
+            />
+            <span className="name-user">@{user?.username}</span>
+          </div>
+          
+          <span 
+            className="change-profile" 
+            onClick={() => setShowMenu(!showMenu)} 
+            style={{ cursor: 'pointer' }}
+          >
+            ...
+          </span>
+
+          {showMenu && (
+            <div className="user-dropdown-menu">
+              <button onClick={onNavigateToEdit} className="dropdown-item">
+                edit profile
+              </button>
+              <button onClick={handleLogout} className="dropdown-item logout-text">
+                logout
+              </button>
+            </div>
+          )}
         </div>
 
       </div>
