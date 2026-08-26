@@ -24,7 +24,7 @@
 .login-input {
   width: 100%;
   padding: 14px 16px;
-  background-color: #F5F3EE; /* Fundo do input levemente diferente para destacar */
+  background-color: #F5F3EE; 
   border: none;
   border-radius: 4px;
   outline: none;
@@ -67,4 +67,9 @@
   text-decoration: underline;
   cursor: pointer;
   font-weight: 500;
+}
+
+.the-ceo {
+  margin-top: 630px;
+  margin-left: -580px; 
 }
