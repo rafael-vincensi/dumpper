@@ -84,6 +84,12 @@
   margin-left: -20px;
   text-decoration: underline;
   cursor: pointer;
+  font-weight: bold;
+}
+
+.follow-user.is-following {
+  color: #797ED9;
+  font-weight:normal; 
 }
 
 .followers {
@@ -181,4 +187,26 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.back-to-grid-btn{
+  background-color: #F5F3EE;
+  color: #0511F2;
+  margin-top: -250px;
+  margin-left: -120px;
+  text-decoration: underline;
+  border: none;
+  border-color: #0511F2;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 8px 16px; 
+  position: fixed;
+}
+
+.like-container {
+  cursor: pointer;
+}
+
+.feed-post-card {
+  margin-top: 65px;
 }
