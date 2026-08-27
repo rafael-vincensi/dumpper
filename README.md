@@ -2,171 +2,173 @@
 
 # 🌐 Dumpper
 
-> Uma API RESTful para uma rede social, onde usuários podem publicar posts, seguir outras pessoas e formar conexões (amigos mútuos) através de um sistema de seguidores.
+> A fullstack social network where users can publish posts, follow other people and form connections (mutual friends) through a follower system.
 
 [![Java](https://img.shields.io/badge/Java-17+-orange?style=for-the-badge&logo=openjdk)](https://www.oracle.com/java/)
 [![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-brightgreen?style=for-the-badge&logo=spring)](https://spring.io/projects/spring-boot)
 [![Hibernate](https://img.shields.io/badge/Hibernate-ORM-informational?style=for-the-badge&logo=hibernate)](https://hibernate.org/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://react.dev/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 </div>
 
-<img width="1907" height="902" alt="feed" src="https://github.com/user-attachments/assets/3657e2ae-f5f2-4795-8a4f-5166927bf046" />
+<img width="1917" height="1078" alt="feed" src="https://github.com/user-attachments/assets/b4a333b2-fa0b-4b26-b86a-1466c58c3476" />
 
 ---
 
-## 💡 Sobre o Projeto
+## 💡 About the Project
 
-O **Dumpper** é o backend completo de uma plataforma social interativa. Mais do que um CRUD simples, a aplicação lida com regras de negócio como **relacionamentos muitos-para-muitos direcionados (sistema de seguidores)**, **feed de postagens** e **cálculo de amizades mútuas**.
+**Dumpper** is a full-stack interactive social platform. More than a simple CRUD, the application handles business rules such as **directed many-to-many relationships (follower system)**, **post feed**, and **mutual friendship calculation**.
 
-O frontend é construído em **React + Vite**, consumindo essa API.
+The backend is a RESTful API built with **Java and Spring Boot**, consumed by a **React + Vite** frontend.
 
 ---
 
-## ✨ Principais Funcionalidades
+## ✨ Key Features
 
-### 👤 Gestão de Usuários
-Perfis com biografia e foto.
+### 👤 User Management
+Profiles with bio, photo, name and username.
 
-<img width="1908" height="907" alt="profile" src="https://github.com/user-attachments/assets/96b4192f-6a93-4e1d-920e-c97b3d512f5f" />
+<img width="1917" height="1078" alt="profile" src="https://github.com/user-attachments/assets/5ee1c20f-ce97-4ae5-b9e8-fe0ee7784049" />
 
-### 📝 Publicações & Feed
-Criação e listagem de posts da comunidade.
+### 📝 Posts & Feed
+Creating and listing posts from the community.
 
-<img width="1912" height="903" alt="feed2" src="https://github.com/user-attachments/assets/c3ce012b-4d95-4420-a1c7-191835d7eb73" />
+<img width="1917" height="1078" alt="feed2" src="https://github.com/user-attachments/assets/c163dbb3-b4bb-41cc-8561-74f09e279123" />
 
-### 🤝 Rede de Conexões (Follows)
-- Seguir e deixar de seguir usuários.
-- Gerenciamento automático e transacional de contadores (`followers` e `following`).
-- Listagem de seguidores, seguindo e cálculo dinâmico de **amigos mútuos** (quando o follow é recíproco, vocês viram amigos).
+### 🤝 Connections (Follows)
+- Follow and unfollow users.
+- Automatic and transactional management of counters (`followers` and `following`).
+- Listing of followers, following, and dynamic calculation of **mutual friends** (when the follow is reciprocal, you become friends).
 
 ### 🔐 Login
-Verificação simples de e-mail e senha contra os dados cadastrados no banco.
+Simple email and password verification against the data stored in the database.
 
 ---
 
-## 🔐 Autenticação
+## 🔐 Authentication
 
-Atualmente o login é feito por uma verificação direta: o e-mail informado é buscado no banco e a senha é comparada com o valor armazenado. Ainda não há hashing de senha, tokens de sessão (JWT) ou controle de permissões, é um mecanismo simples, pensado para a fase atual do projeto.
+Currently, login is done through a direct verification: the provided email is looked up in the database and the password is compared against the stored value. There is no password hashing, session tokens (JWT), or permission control yet, it's a simple mechanism, suited for the current stage of the project.
 
 ---
 
 ## 🗺️ Roadmap
 
-- [ ] Hash de senha (ex: BCrypt) e autenticação mais robusta
-- [ ] Autenticação baseada em token (JWT) e sessões
-- [x] Estrutura de status de música tocando no perfil (`/users/{id}/listening`)
-- [ ] Integração real com a API do Spotify (em avaliação, já que o modo de desenvolvimento da API limita o número de contas autorizadas a exibir dados, o que conflita com a ideia de qualquer usuário poder usar a funcionalidade)
+- [ ] Password hashing (e.g. BCrypt) and more robust authentication
+- [ ] Token-based authentication (JWT) and sessions
+- [x] "Now playing" status structure on the profile (`/users/{id}/listening`)
+- [ ] Real integration with the Spotify API (under evaluation, since the API's development mode limits the number of authorized accounts that can display data, which conflicts with the idea of any user being able to use the feature)
 
 ---
 
-## 🛠️ Tecnologias & Arquitetura
+## 🛠️ Tech Stack & Architecture
 
-O projeto adota uma arquitetura em camadas (Controller → Service → Repository → Model), garantindo isolamento de regras de negócio e segurança transacional (`@Transactional`).
+The project follows a layered architecture (Controller → Service → Repository → Model), ensuring business logic isolation and transactional safety (`@Transactional`).
 
 **Backend**
 
-| Camada / Ferramenta | Tecnologia |
+| Layer / Tool | Technology |
 |---------------------|-----------|
-| Linguagem | Java 17+ |
+| Language | Java 17+ |
 | Framework | Spring Boot |
-| Persistência | Spring Data JPA / Hibernate |
-| Banco de Dados | H2 (Dev) / PostgreSQL (Prod) |
-| Validação & Utilitários | Bean Validation, Lombok |
-| Gerenciamento de Dependências | Maven |
+| Persistence | Spring Data JPA / Hibernate |
+| Database | PostgreSQL |
+| Validation & Utilities | Lombok |
+| Dependency Management | Maven |
 
 **Frontend**
 
-| Camada / Ferramenta | Tecnologia |
+| Layer / Tool | Technology |
 |---------------------|-----------|
-| Biblioteca | React |
+| Library | React |
 | Build Tool | Vite |
 
 ---
 
-## 📡 Endpoints da API
+## 📡 API Endpoints
 
-### Usuários (`/users`)
+### Users (`/users`)
 
-| Método | Endpoint | Descrição |
+| Method | Endpoint | Description |
 |--------|----------|-----------|
-| POST | `/users` | Cria um usuário |
-| GET | `/users/{id}` | Busca usuário por ID |
-| PUT | `/users/{id}` | Atualiza dados do usuário |
-| DELETE | `/users/{id}` | Remove um usuário |
-| GET | `/users/username/{username}` | Busca perfil por username |
-| PATCH | `/users/{id}/listening` | Atualiza o status de música tocando no perfil |
-| POST | `/users/register` | Registra um novo usuário |
-| POST | `/users/login` | Autentica um usuário |
-| GET | `/users/search?query=` | Busca usuários por nome/username |
+| POST | `/users` | Creates a user |
+| GET | `/users/{id}` | Retrieves a user by ID |
+| PUT | `/users/{id}` | Updates a user's data |
+| DELETE | `/users/{id}` | Removes a user |
+| GET | `/users/username/{username}` | Retrieves a profile by username |
+| PATCH | `/users/{id}/listening` | Updates the "now playing" status on the profile |
+| POST | `/users/register` | Registers a new user |
+| POST | `/users/login` | Authenticates a user |
+| GET | `/users/search?query=` | Searches users by name/username |
 
 ### Posts (`/post`)
 
-| Método | Endpoint | Descrição |
+| Method | Endpoint | Description |
 |--------|----------|-----------|
-| GET | `/post/{id}` | Busca um post por ID |
-| POST | `/post` | Cria um novo post |
-| GET | `/post` | Lista todos os posts |
-| PUT | `/post/update/{id}` | Atualiza um post |
-| DELETE | `/post/{id}` | Remove um post |
+| GET | `/post/{id}` | Retrieves a post by ID |
+| POST | `/post` | Creates a new post |
+| GET | `/post` | Lists all posts |
+| PUT | `/post/update/{id}` | Updates a post |
+| DELETE | `/post/{id}` | Removes a post |
 
-### Curtidas (`/likes`)
+### Likes (`/likes`)
 
-| Método | Endpoint | Descrição |
+| Method | Endpoint | Description |
 |--------|----------|-----------|
-| POST | `/likes/{userId}/{postId}` | Curte um post |
-| GET | `/likes/{postId}` | Lista usuários que curtiram o post |
-| GET | `/likes/check/{userId}/{postId}` | Verifica se o usuário curtiu o post |
+| POST | `/likes/{userId}/{postId}` | Likes a post |
+| GET | `/likes/{postId}` | Lists users who liked the post |
+| GET | `/likes/check/{userId}/{postId}` | Checks whether a user liked the post |
 
-### Conexões (`/follow`)
+### Connections (`/follow`)
 
-| Método | Endpoint | Descrição |
+| Method | Endpoint | Description |
 |--------|----------|-----------|
-| POST | `/follow?followerId=&followingId=` | Segue um usuário |
-| DELETE | `/follow?followerId=&followingId=` | Deixa de seguir um usuário |
-| GET | `/follow/following/{userId}` | Lista quem o usuário está seguindo |
-| GET | `/follow/followers/{userId}` | Lista os seguidores do usuário |
-| GET | `/follow/check?followerId=&followingId=` | Verifica se um segue o outro |
-| GET | `/follow/{userId}/friends` | Lista amigos mútuos |
+| POST | `/follow?followerId=&followingId=` | Follows a user |
+| DELETE | `/follow?followerId=&followingId=` | Unfollows a user |
+| GET | `/follow/following/{userId}` | Lists who the user is following |
+| GET | `/follow/followers/{userId}` | Lists the user's followers |
+| GET | `/follow/check?followerId=&followingId=` | Checks whether one follows the other |
+| GET | `/follow/{userId}/friends` | Lists mutual friends |
 
 ---
 
-## 🚀 Como Executar o Projeto Localmente
+## 🚀 Running Locally
 
-### Pré-requisitos
+### Prerequisites
 
-- **Java JDK 17** ou superior
-- **Maven** (ou use a própria IDE)
-- **Node.js** e **npm** (para o frontend)
+- **Java JDK 17** or higher
+- **Maven** (or use your IDE)
+- **Node.js** and **npm** (for the frontend)
 
 ### Backend
 
 ```bash
-# 1. Clone o repositório
+# 1. Clone the repository
 git clone https://github.com/rafael-vincensi/dumpper.git
 
-# 2. Entre na pasta do backend
-cd dumpper/backend
+# 2. Enter the backend folder
+cd dumpper/socialapp
 
-# 3. Execute a aplicação via Maven
+# 3. Run the application via Maven
 mvn spring-boot:run
 ```
 
 ### Frontend
 
 ```bash
-# 1. Entre na pasta do frontend
-cd dumpper/frontend
+# 1. Enter the frontend folder
+cd dumpper/social-frontend
 
-# 2. Instale as dependências
+# 2. Install dependencies
 npm install
 
-# 3. Rode em modo desenvolvimento
+# 3. Run in development mode
 npm run dev
 ```
 
 ---
 
-## 📄 Licença
+## 📄 License
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
