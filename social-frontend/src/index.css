@@ -1,11 +1,9 @@
-/* Reseta margens e garante o comportamento padrão de caixas */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Configura o fundo global escuro e a fonte padrão para o app todo */
 body {
   background-color: #F5F3EE;
   color: #0511F2;
