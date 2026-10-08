@@ -19,7 +19,7 @@
 
 ## 💡 About the Project
 
-**Dumpper** is a full-stack interactive social platform. More than a simple CRUD, the application handles business rules such as **directed many-to-many relationships (follower system)**, **post feed**, and **mutual friendship calculation**.
+**Dumpper** is a full-stack social network built around a REST API. The backend handles user profiles, posts, likes and a directed follower relationship, including transactional counter management and mutual-friend calculation.
 
 The backend is a RESTful API built with **Java and Spring Boot**, consumed by a **React + Vite** frontend.
 
@@ -70,7 +70,7 @@ The project follows a layered architecture (Controller → Service → Repositor
 
 | Layer / Tool | Technology |
 |---------------------|-----------|
-| Language | Java 17+ |
+| Language | Java 21 |
 | Framework | Spring Boot |
 | Persistence | Spring Data JPA / Hibernate |
 | Database | PostgreSQL |
@@ -137,7 +137,7 @@ The project follows a layered architecture (Controller → Service → Repositor
 
 ### Prerequisites
 
-- **Java JDK 17** or higher
+- **Java JDK 21** or higher
 - **Maven** (or use your IDE)
 - **Node.js** and **npm** (for the frontend)
 
